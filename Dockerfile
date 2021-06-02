@@ -1,0 +1,40 @@
+FROM fluent/fluentd:v1.12-debian-1
+
+# Use root account to use apt
+USER root
+
+# below RUN includes plugin as examples elasticsearch is not required
+# you may customize including plugins as you wish
+RUN buildDeps="sudo make gcc g++ libc-dev" \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends $buildDeps \
+ && sudo gem install fluent-plugin-logzio \
+ && sudo gem install fluent-plugin-record-modifier \
+ && sudo gem install fluent-plugin-docker_metadata_elastic_filter \
+ && sudo gem install fluent-plugin-detect-exceptions \
+ && sudo gem sources --clear-all \
+ && SUDO_FORCE_REMOVE=yes \
+    apt-get purge -y --auto-remove \
+                  -o APT::AutoRemove::RecommendsImportant=false \
+                  $buildDeps \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
+
+COPY fluent.conf /fluentd/etc/
+COPY entrypoint.sh /bin/
+
+ENV LOGZIO_BUFFER_TYPE "file"
+ENV LOGZIO_BUFFER_PATH "/var/log/fluentd-buffers/stackdriver.buffer"
+ENV LOGZIO_OVERFLOW_ACTION "block"
+ENV LOGZIO_CHUNK_LIMIT_SIZE "2M"
+ENV LOGZIO_QUEUE_LIMIT_LENGTH "6"
+ENV LOGZIO_FLUSH_INTERVAL "5s"
+ENV LOGZIO_RETRY_MAX_INTERVAL "30"
+ENV LOGZIO_RETRY_FOREVER "true"
+ENV LOGZIO_FLUSH_THREAD_COUNT "2"
+ENV INCLUDE_NAMESPACE ""
+ENV LOGZIO_INCLUDE_REGEX "(.+)"
+
+# Defaults value for system.conf
+ENV LOGZIO_LOG_LEVEL "info"
+
