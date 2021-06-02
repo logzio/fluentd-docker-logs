@@ -23,6 +23,12 @@ RUN buildDeps="sudo make gcc g++ libc-dev" \
 COPY fluent.conf /fluentd/etc/
 COPY entrypoint.sh /bin/
 
+
+ENV LOGZIO_LOG_LISTENER "https://listener.logz.io:8071"
+ENV LOGZIO_TYPE "docker-fluentd"
+ENV LOGZIO_INCLUDE_REGEX "(.+)"
+
+
 ENV LOGZIO_BUFFER_TYPE "file"
 ENV LOGZIO_BUFFER_PATH "/var/log/fluentd-buffers/stackdriver.buffer"
 ENV LOGZIO_OVERFLOW_ACTION "block"
@@ -33,7 +39,6 @@ ENV LOGZIO_RETRY_MAX_INTERVAL "30"
 ENV LOGZIO_RETRY_FOREVER "true"
 ENV LOGZIO_FLUSH_THREAD_COUNT "2"
 ENV INCLUDE_NAMESPACE ""
-ENV LOGZIO_INCLUDE_REGEX "(.+)"
 
 # Defaults value for system.conf
 ENV LOGZIO_LOG_LEVEL "info"
