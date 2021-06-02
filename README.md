@@ -19,9 +19,10 @@ docker pull logzio/fluentd-docker-logs
 ```
 
 ### 2. Run the container
+#### Examples:
+For a complete list of options, see the parameters below the code blocks.👇
 
-For a complete list of options, see the parameters below the code block.👇
-
+#### Send to logzio listener:
 ```
 docker run -it --rm \
 --name fluentd-docker-logs \
@@ -32,6 +33,22 @@ docker run -it --rm \
 -e LOGZIO_LOG_SHIPPING_TOKEN=<<LOGZIO_LOG_SHIPPING_TOKEN>> \
 -e LOGZIO_TYPE=<<LOGZIO_TYPE>> \
 -e LOGZIO_INCLUDE_REGEX=<<LOGZIO_INCLUDE_REGEX>> \
+logzio/fluentd-docker-logs:latest
+```
+
+#### Via your proxy server:
+
+```
+docker run -it --rm \
+--name fluentd-docker-logs \
+-v $(pwd)/log:/fluentd/log \
+-v /var/lib/docker/containers:/var/lib/docker/containers \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-e LOGZIO_LOG_LISTENER=<<LOGZIO_LOG_LISTENER>> \
+-e LOGZIO_LOG_SHIPPING_TOKEN=<<LOGZIO_LOG_SHIPPING_TOKEN>> \
+-e LOGZIO_TYPE=<<LOGZIO_TYPE>> \
+-e LOGZIO_PROXY_URI=<<LOGZIO_PROXY_URI>> \
+-e LOGZIO_PROXY_CERT=<<LOGZIO_PROXY_CERT>> \
 logzio/fluentd-docker-logs:latest
 ```
 
