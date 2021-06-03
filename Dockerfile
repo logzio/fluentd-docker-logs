@@ -8,6 +8,7 @@ USER root
 RUN buildDeps="sudo make gcc g++ libc-dev" \
  && apt-get update \
  && apt-get install -y --no-install-recommends $buildDeps \
+ && sudo gem install fluent-plugin-prometheus \
  && sudo gem install fluent-plugin-logzio \
  && sudo gem install fluent-plugin-record-modifier \
  && sudo gem install fluent-plugin-docker_metadata_elastic_filter \
@@ -38,6 +39,7 @@ ENV LOGZIO_FLUSH_INTERVAL "5s"
 ENV LOGZIO_RETRY_MAX_INTERVAL "30"
 ENV LOGZIO_RETRY_FOREVER "true"
 ENV LOGZIO_FLUSH_THREAD_COUNT "2"
+ENV LOGZIO_SLOW_FLUSH_LOG_THRESHOLD "20.0"
 
 # Defaults value for system.conf
 ENV LOGZIO_LOG_LEVEL "info"
