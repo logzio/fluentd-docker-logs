@@ -34,7 +34,7 @@ docker run -it --rm \
 -e LOGZIO_LOG_SHIPPING_TOKEN=<<LOGZIO_LOG_SHIPPING_TOKEN>> \
 -e LOGZIO_TYPE=<<LOGZIO_TYPE>> \
 -e LOGZIO_INCLUDE_REGEX=<<LOGZIO_INCLUDE_REGEX>> \
-logzio/fluentd-docker-logs:latest
+logzio/fluentd-docker-logs
 ```
 
 #### Via your proxy server:
@@ -51,7 +51,7 @@ docker run -it --rm \
 -e LOGZIO_TYPE=<<LOGZIO_TYPE>> \
 -e LOGZIO_PROXY_URI=<<LOGZIO_PROXY_URI>> \
 -e LOGZIO_PROXY_CERT=<<LOGZIO_PROXY_CERT>> \
-logzio/fluentd-docker-logs:latest
+logzio/fluentd-docker-logs
 ```
 
 Use the `-p 5001:5001` flag to expose fluentd metrics in prometheus format on [http://localhost:5001/metrics](http://localhost:5001/metrics)
@@ -83,3 +83,7 @@ Use the `-p 5001:5001` flag to expose fluentd metrics in prometheus format on [h
 Spin up your Docker containers if you haven’t done so already. Give your logs a few minutes to get from your system to ours, and then open [Kibana](https://app.logz.io/#/dashboard/kibana).
 
 ### Change log
+- 1.0.0:
+  - collect and sends container logs
+  - Proxy support
+  - Expose fluentd metrics on port 5001/metrics    
