@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+gem "fluent-plugin-logzio"
+gem "fluent-plugin-record-modifier"
+gem "fluent-plugin-docker_metadata_elastic_filter"
+gem "fluent-plugin-detect-exceptions"
