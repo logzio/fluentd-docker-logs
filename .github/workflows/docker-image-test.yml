@@ -12,23 +12,23 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag test-logs
     - name: run docker image
-      run: docker run --rm -d --name test-docker-fluentd -p 5001:5001 -v $(pwd)/log:/fluentd/log -v /var/lib/docker/containers:/var/lib/docker/containers -v /var/run/docker.sock:/var/run/docker.sock:ro -e LOGZIO_LOG_SHIPPING_TOKEN=${{ secrets.TEST_SHIPING_TOKEN }} -e LOGZIO_TYPE=yotamis test-logs
-    - name: Sleep for 10 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '10s'
+      run: docker run --rm -d --name test-docker-fluentd -p 5001:5001 -v $(pwd)/log:/fluentd/log -v /var/lib/docker/containers:/var/lib/docker/containers -v /var/run/docker.sock:/var/run/docker.sock:ro -e LOGZIO_LOG_SHIPPING_TOKEN=${{ secrets.TEST_SHIPING_TOKEN }} -e LOGZIO_TYPE=yotamiss test-logs
     - name: run logging image
       run: docker run -d --name generate-logs chentex/random-logger:latest 1 10 50
     - name: run1
       run: docker ps -a
     - name: show logs
       run: docker logs test-docker-fluentd
+    - name: Sleep for 10 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
         python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
     - run: pip install requests
-    - run: python test.py ${{ secrets.TEST_API_TOKEN }} yotamis
+    - run: python test.py ${{ secrets.TEST_API_TOKEN }} yotamiss
 
   # test_with_python:
   #   runs-on: ubuntu-latest
