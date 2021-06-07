@@ -27,7 +27,7 @@ class TestFluentdIntegration(unittest.TestCase):
                         {
                             "range": {
                                 "@timestamp": {
-                                    "gte": "now-1d",
+                                    "gte": "now-10m",
                                     "lte": "now"
                                 }
                             }
