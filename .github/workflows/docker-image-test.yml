@@ -9,10 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: run logging image
-      run: docker run -d --name generate-logs chentex/random-logger:latest 1 10 50
-    - name: run1
-      run: docker ps -a
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag test-logs
     - name: run docker image
@@ -23,6 +19,10 @@ jobs:
       uses: jakejarvis/wait-action@master
       with:
         time: '10s'
+    - name: run logging image
+      run: docker run -d --name generate-logs chentex/random-logger:latest 1 10 50
+    - name: run1
+      run: docker ps -a
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
