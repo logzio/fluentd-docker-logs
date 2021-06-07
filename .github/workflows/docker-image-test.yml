@@ -19,6 +19,7 @@ jobs:
       uses: jakejarvis/wait-action@master
       with:
         time: '10s'
+      run: docker ps -a
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
