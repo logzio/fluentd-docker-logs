@@ -40,6 +40,8 @@ class TestFluentdIntegration(unittest.TestCase):
         }
         response = requests.post(url=api_url, json=api_query, headers=headers)
         log_count = int(json.loads(response.text)['hits']['total'])
+        print(f'api_token: {api_token}')
+        print(f'Query: {query}')
         valid_count = 50
         self.assertEqual(log_count, valid_count, f"Should be {valid_count}")
 

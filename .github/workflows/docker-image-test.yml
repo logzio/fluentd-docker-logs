@@ -12,7 +12,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag test-logs
     - name: run docker image
-      run: docker run --rm -d --name test-docker-fluent -p 5001:5001 -v $(pwd)/log:/fluentd/log -v /var/lib/docker/containers:/var/lib/docker/containers -v /var/run/docker.sock:/var/run/docker.sock:ro -e LOGZIO_INCLUDE_REGEX=generate-logs -e LOGZIO_LOG_SHIPPING_TOKEN=${{ secrets.TEST_SHIPING_TOKEN }} -e LOGZIO_TYPE=$GITHUB_RUN_ID test-logs
+      run: docker run --rm -d --name test-docker-fluent -p 5001:5001 -v $(pwd)/log:/fluentd/log -v /var/lib/docker/containers:/var/lib/docker/containers -v /var/run/docker.sock:/var/run/docker.sock:ro -e LOGZIO_INCLUDE_REGEX=generate-logs -e LOGZIO_LOG_SHIPPING_TOKEN=${{ secrets.TEST_SHIPING_TOKEN }} -e LOGZIO_TYPE=${{ github.run_id }} test-logs
     - name: run logging image
       run: docker run -d --name generate-logs chentex/random-logger:latest 1 10 50
     - uses: actions/checkout@v2
@@ -20,7 +20,7 @@ jobs:
       with:
         python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
     - run: pip install requests
-    - run: python test.py ${{ secrets.TEST_API_TOKEN }} $GITHUB_RUN_ID
+    - run: python test.py ${{ secrets.TEST_API_TOKEN }} ${{ github.run_id }}
 
   # test_with_python:
   #   runs-on: ubuntu-latest
