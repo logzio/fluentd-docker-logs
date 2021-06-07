@@ -12,7 +12,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag test-logs
     - name: run docker image
-      run: docker run -it --rm \
+      run: docker run --rm \
            --name custom-docker-fluent \
            -p 5001:5001 \
            -v $(pwd)/log:/fluentd/log \
