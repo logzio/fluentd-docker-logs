@@ -20,7 +20,7 @@ jobs:
       with:
         python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
     - run: pip install requests
-    - run: python test.py ${{ secrets.TEST_API_TOKEN }} {{ env.GITHUB_RUN_ID }}
+    - run: python test.py ${{ secrets.TEST_API_TOKEN }} ${{ env.GITHUB_RUN_ID }}
 
   # test_with_python:
   #   runs-on: ubuntu-latest
