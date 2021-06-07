@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag test-logs
+    - name: run docker image
+      run: docker run -it --rm \
+           --name custom-docker-fluent \
+           -p 5001:5001 \
+           -v $(pwd)/log:/fluentd/log \
+           -v /var/lib/docker/containers:/var/lib/docker/containers \
+           -v /var/run/docker.sock:/var/run/docker.sock:ro \
+           -e LOGZIO_LOG_SHIPPING_TOKEN={} \
+           -e LOGZIO_TYPE=yotam-fluentd-test \
+           test-logs
+
+    
