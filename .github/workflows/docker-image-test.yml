@@ -12,7 +12,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag test-logs
     - name: run docker image
-      run: docker run --rm -d --name test-docker-fluentd -p 5001:5001 -v $(pwd)/log:/fluentd/log -v /var/lib/docker/containers:/var/lib/docker/containers -v /var/run/docker.sock:/var/run/docker.sock:ro -e LOGZIO_INCLUDE_REGEX=generate-logs -e LOGZIO_LOG_SHIPPING_TOKEN=${{ secrets.TEST_SHIPING_TOKEN }} -e LOGZIO_TYPE=yotamis test-logs
+      run: docker run --rm -d --name test-docker-fluentd -p 5001:5001 -v $(pwd)/log:/fluentd/log -v /var/lib/docker/containers:/var/lib/docker/containers -v /var/run/docker.sock:/var/run/docker.sock:ro -e LOGZIO_LOG_SHIPPING_TOKEN=${{ secrets.TEST_SHIPING_TOKEN }} -e LOGZIO_TYPE=yotamis test-logs
     - name: Sleep for 10 seconds
       uses: jakejarvis/wait-action@master
       with:
