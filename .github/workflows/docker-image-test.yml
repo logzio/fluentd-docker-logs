@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build_run:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -18,8 +18,11 @@ jobs:
            -v $(pwd)/log:/fluentd/log \
            -v /var/lib/docker/containers:/var/lib/docker/containers \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
-           -e LOGZIO_LOG_SHIPPING_TOKEN={} \
-           -e LOGZIO_TYPE=yotam-fluentd-test \
+           -e LOGZIO_LOG_SHIPPING_TOKEN=${{ secrets.TEST_SHIPPING_TOKEN }} \
+           -e LOGZIO_TYPE=github-fluentd-test \
            test-logs
+    - name: run logging image
+      run: docker run chentex/random-logger:latest 100 400 50
+
 
     
