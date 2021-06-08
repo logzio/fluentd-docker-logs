@@ -83,7 +83,8 @@ Use the `-p 5001:5001` flag to expose fluentd metrics in prometheus format on [h
 Spin up your Docker containers if you haven’t done so already. Give your logs a few minutes to get from your system to ours, and then open [Kibana](https://app.logz.io/#/dashboard/kibana).
 
 ### Change log
+To see all avilable tags refer to this projects repo on [Docker hub](https://hub.docker.com/r/logzio/fluentd-docker-logs/tags?page=1&ordering=last_updated)
 - 1.0.0:
   - collect and sends container logs
   - Proxy support
-  - Expose fluentd metrics on port 5001/metrics    
+  - Expose fluentd metrics on port 5001/metrics
