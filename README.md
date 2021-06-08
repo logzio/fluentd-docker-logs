@@ -66,8 +66,9 @@ Use the `-p 5001:5001` flag to expose fluentd metrics in prometheus format on [h
 | LOGZIO_TYPE | **Default**: `docker-fluentd` <br> The log type you'll use with this Docker. This is shown in your logs under the `type` field in Kibana. <br> Logz.io applies parsing based on `type`. |
 | LOGZIO_INCLUDE_REGEX | **Default**: `.+` <br>  Specifies regex expresion to match against container names, logs from containers that their name does not match the expresion will not be sent. |
 | LOGZIO_PROXY_URI | **Default**: `nil` <br>  Your proxy uri. |
-| LOGZIO_SLOW_FLUSH_LOG_THRESHOLD | **Default**: `20.0` <br>  The threshold for chunk flush performance check. |
 | LOGZIO_PROXY_CERT | **Default**: `nil` <br>  Your proxy cert. |
+| LOGZIO_CONTAINER_STATUS_REGEX | **Default**: `running` <br>  Regex to match against container status. One or more of `created`, `restarting`, `running`, `removing`, `paused`, `exited`, or `dead`. |
+| LOGZIO_SLOW_FLUSH_LOG_THRESHOLD | **Default**: `20.0` <br>  The threshold for chunk flush performance check. |
 | LOGZIO_BUFFER_TYPE | **Default**: `file` <br>  Specifies which plugin to use as the backend. |
 | LOGZIO_BUFFER_PATH | **Default**: `/var/log/Fluentd-buffers/stackdriver.buffer` <br>  Path of the buffer. |
 | LOGZIO_OVERFLOW_ACTION | **Default**: `block` <br>  Controls the behavior when the queue becomes full. Refer to [fluentd docs](https://docs.fluentd.org/output#overflow_action) for more details about your options.|
