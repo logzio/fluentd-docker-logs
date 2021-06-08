@@ -1,4 +1,4 @@
-name: Bukd and test iamge
+name: Build and test iamge
 on:
   pull_request:
     branches: [ main ]
