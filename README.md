@@ -19,10 +19,13 @@ docker pull logzio/fluentd-docker-logs
 ```
 
 ### 2. Run the container
+
 #### Examples:
+
 For a complete list of options, see the parameters below the code blocks.👇
 
 #### Send to logzio listener:
+
 ```
 docker run -it --rm \
 --name fluentd-docker-logs \
@@ -55,36 +58,38 @@ logzio/fluentd-docker-logs
 ```
 
 Use the `-p 5001:5001` flag to expose fluentd metrics in prometheus format on [http://localhost:5001/metrics](http://localhost:5001/metrics)
+
 #### Parameters
 
-
-
-| Parameter | Description |
-|---|---|
-| LOGZIO_LOG_SHIPPING_TOKEN | **Required**. Your Logz.io account token. Replace `LOGZIO_LOG_SHIPPING_TOKEN` with the [token](https://app.logz.io/#/dashboard/settings/general) of the account you want to ship to. |
-| LOGZIO_LOG_LISTENER | **Default**: `https://listener.logz.io:8071` .<br> with your region’s listener host . For more information on finding your account’s region, see Account region. |
-| LOGZIO_TYPE | **Default**: `docker-fluentd` <br> The log type you'll use with this Docker. This is shown in your logs under the `type` field in Kibana. <br> Logz.io applies parsing based on `type`. |
-| LOGZIO_INCLUDE_REGEX | **Default**: `.+` <br>  Specifies regex expresion to match against container names, logs from containers that their name does not match the expresion will not be sent. |
-| LOGZIO_PROXY_URI | **Default**: `nil` <br>  Your proxy uri. |
-| LOGZIO_PROXY_CERT | **Default**: `nil` <br>  Your proxy cert. |
-| LOGZIO_CONTAINER_STATUS_REGEX | **Default**: `running` <br>  Regex to match against container status. One or more of `created`, `restarting`, `running`, `removing`, `paused`, `exited`, or `dead`. |
-| LOGZIO_SLOW_FLUSH_LOG_THRESHOLD | **Default**: `20.0` <br>  The threshold for chunk flush performance check. |
-| LOGZIO_BUFFER_TYPE | **Default**: `file` <br>  Specifies which plugin to use as the backend. |
-| LOGZIO_BUFFER_PATH | **Default**: `/var/log/Fluentd-buffers/stackdriver.buffer` <br>  Path of the buffer. |
-| LOGZIO_OVERFLOW_ACTION | **Default**: `block` <br>  Controls the behavior when the queue becomes full. Refer to [fluentd docs](https://docs.fluentd.org/output#overflow_action) for more details about your options.|
-| LOGZIO_CHUNK_LIMIT_SIZE | **Default**: `2M` <br>  Maximum size of a chunk allowed |
-| LOGZIO_QUEUE_LIMIT_LENGTH | **Default**: `6` <br>  Maximum length of the output queue. |
-| LOGZIO_FLUSH_INTERVAL | **Default**: `5s` <br>  Interval, in seconds, to wait before invoking the next buffer flush. |
-| LOGZIO_RETRY_MAX_INTERVAL | **Default**: `30s` <br>  Maximum interval, in seconds, to wait between retries. |
-| LOGZIO_FLUSH_THREAD_COUNT | **Default**: `2` <br>  Number of threads to flush the buffer. |
-| LOGZIO_LOG_LEVEL | **Default**: `info` <br> The log level for this container. |
+| Parameter                       | Description                                                                                                                                                                                |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| LOGZIO_LOG_SHIPPING_TOKEN       | **Required**. Your Logz.io account token. Replace `LOGZIO_LOG_SHIPPING_TOKEN` with the [token](https://app.logz.io/#/dashboard/settings/general) of the account you want to ship to.       |
+| LOGZIO_LOG_LISTENER             | **Default**: `https://listener.logz.io:8071` .<br> with your region’s listener host . For more information on finding your account’s region, see Account region.                           |
+| LOGZIO_TYPE                     | **Default**: `docker-fluentd` <br> The log type you'll use with this Docker. This is shown in your logs under the `type` field in Kibana. <br> Logz.io applies parsing based on `type`.    |
+| LOGZIO_INCLUDE_REGEX            | **Default**: `.+` <br> Specifies regex expresion to match against container names, logs from containers that their name does not match the expresion will not be sent.                     |
+| LOGZIO_PROXY_URI                | **Default**: `nil` <br> Your proxy uri.                                                                                                                                                    |
+| LOGZIO_PROXY_CERT               | **Default**: `nil` <br> Your proxy cert.                                                                                                                                                   |
+| ADDITIONAL_FIELDS               | Include additional fields with every message sent, formatted as "fieldName1=fieldValue1,fieldName2=fieldValue2".                                                                           |
+| LOGZIO_CONTAINER_STATUS_REGEX   | **Default**: `running` <br> Regex to match against container status. One or more of `created`, `restarting`, `running`, `removing`, `paused`, `exited`, or `dead`.                         |
+| LOGZIO_SLOW_FLUSH_LOG_THRESHOLD | **Default**: `20.0` <br> The threshold for chunk flush performance check.                                                                                                                  |
+| LOGZIO_BUFFER_TYPE              | **Default**: `file` <br> Specifies which plugin to use as the backend.                                                                                                                     |
+| LOGZIO_BUFFER_PATH              | **Default**: `/var/log/Fluentd-buffers/stackdriver.buffer` <br> Path of the buffer.                                                                                                        |
+| LOGZIO_OVERFLOW_ACTION          | **Default**: `block` <br> Controls the behavior when the queue becomes full. Refer to [fluentd docs](https://docs.fluentd.org/output#overflow_action) for more details about your options. |
+| LOGZIO_CHUNK_LIMIT_SIZE         | **Default**: `2M` <br> Maximum size of a chunk allowed                                                                                                                                     |
+| LOGZIO_QUEUE_LIMIT_LENGTH       | **Default**: `6` <br> Maximum length of the output queue.                                                                                                                                  |
+| LOGZIO_FLUSH_INTERVAL           | **Default**: `5s` <br> Interval, in seconds, to wait before invoking the next buffer flush.                                                                                                |
+| LOGZIO_RETRY_MAX_INTERVAL       | **Default**: `30s` <br> Maximum interval, in seconds, to wait between retries.                                                                                                             |
+| LOGZIO_FLUSH_THREAD_COUNT       | **Default**: `2` <br> Number of threads to flush the buffer.                                                                                                                               |
+| LOGZIO_LOG_LEVEL                | **Default**: `info` <br> The log level for this container.                                                                                                                                 |
 
 ### 3. Check Logz.io for your logs
 
 Spin up your Docker containers if you haven’t done so already. Give your logs a few minutes to get from your system to ours, and then open [Kibana](https://app.logz.io/#/dashboard/kibana).
 
 ### Change log
+
 To see all avilable tags refer to this projects repo on [Docker hub](https://hub.docker.com/r/logzio/fluentd-docker-logs/tags?page=1&ordering=last_updated)
+
 - 1.0.0:
   - collect and sends container logs
   - Proxy support
