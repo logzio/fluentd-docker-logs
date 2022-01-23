@@ -1,5 +1,6 @@
 import time
 import os
+import subprocess
 
 
 class FluentdManager:
@@ -19,22 +20,23 @@ class FluentdManager:
         return ''.join(full_configuration)
 
     def populate_additional_fields(self):
-        additional_fields = os.environ['ADDITIONAL_FIELDS']
 
-        additional_fields = additional_fields.split(',')
+        additional_fields = [ad.strip()
+                             for ad in os.environ["ADDITIONAL_FIELDS"].split(",")]
         if len(additional_fields) > 0:
             extra_configuration = self._parse_additional_fieds(
                 additional_fields)
 
-            with open('./fluentd/etc/fluent_record_modifier.conf', "w") as file:
+            with open('./fluentd/etc/fluent_record_modifier.conf') as file:
                 file.write('')
                 file.write(extra_configuration)
 
     def run(self):
-        os.system("/bin/entrypoint.sh fluentd")
+        subprocess.call("/bin/entrypoint.sh fluentd")
 
 
 if __name__ == '__main__':
     w = FluentdManager()
-    w.populate_additional_fields()
+    if 'ADDITIONAL_FIELDS' in os.environ:
+        w.populate_additional_fields()
     w.run()
