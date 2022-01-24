@@ -27,8 +27,7 @@ class FluentdManager:
             extra_configuration = self._parse_additional_fieds(
                 additional_fields)
 
-            with open('./fluentd/etc/fluent_record_modifier.conf') as file:
-                file.write('')
+            with open('./fluentd/etc/fluent_record_modifier.conf', "w") as file:
                 file.write(extra_configuration)
 
     def run(self):
