@@ -7,7 +7,7 @@ USER root
 # you may customize including plugins as you wish
 RUN buildDeps="sudo make gcc g++ libc-dev" \
 	&& apt-get update \
-	&& apt-get install -y python-pip python-dev \
+	&& apt-get install -y python3-pip python3 \
 	&& apt-get install -y --no-install-recommends $buildDeps \
 	&& sudo gem install fluent-plugin-prometheus \
 	&& sudo gem install fluent-plugin-logzio \
@@ -22,7 +22,6 @@ RUN buildDeps="sudo make gcc g++ libc-dev" \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
 
-# COPY --from=fluentdBuilder fluent.conf /fluentd/etc/
 COPY fluent.conf /fluentd/etc/
 COPY fluent_record_modifier.conf /fluentd/etc/
 COPY entrypoint.sh /bin/
@@ -50,4 +49,4 @@ ENV LOGZIO_CONTAINER_STATUS_REGEX  "running"
 # Defaults value for system.conf
 ENV LOGZIO_LOG_LEVEL "info"
 
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]
