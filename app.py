@@ -32,9 +32,10 @@ class FluentdManager:
     def populate_additional_fields(self):
         additional_fields = [ad.strip()
                              for ad in os.environ["ADDITIONAL_FIELDS"].split(",")]
-        logger.debug('Length of ADDITIONAL_FIELDS is: ',
-                     len(additional_fields))
+
         if len(additional_fields) > 0:
+            logger.debug(
+                f'Detected {len(additional_fields)} additional fields')
             extra_configuration = self._parse_additional_fieds(
                 additional_fields)
             try:
@@ -48,6 +49,8 @@ class FluentdManager:
             subprocess.run(["/bin/entrypoint.sh", "fluentd"])
         except subprocess.CalledProcessError as e:
             logger.error(e)
+        except KeyboardInterrupt as e:
+            logger.info('Application is stopped')
 
 
 if __name__ == '__main__':
