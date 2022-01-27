@@ -49,4 +49,4 @@ ENV LOGZIO_CONTAINER_STATUS_REGEX  "running"
 # Defaults value for system.conf
 ENV LOGZIO_LOG_LEVEL "info"
 
-CMD ["python3", "app.py"]
+CMD ["python3","-u", "app.py"]

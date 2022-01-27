@@ -32,6 +32,8 @@ class FluentdManager:
     def populate_additional_fields(self):
         additional_fields = [ad.strip()
                              for ad in os.environ["ADDITIONAL_FIELDS"].split(",")]
+        logger.debug('Length of ADDITIONAL_FIELDS is: ',
+                     len(additional_fields))
         if len(additional_fields) > 0:
             extra_configuration = self._parse_additional_fieds(
                 additional_fields)
