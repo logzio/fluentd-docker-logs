@@ -30,7 +30,6 @@ class FluentdManager:
                 "Please check your ADDITIONAL_FIELDS,  pattern to use it should be fieldName1=fieldValue1,fieldName2=fieldValue2")
 
     def populate_additional_fields(self):
-
         additional_fields = [ad.strip()
                              for ad in os.environ["ADDITIONAL_FIELDS"].split(",")]
         if len(additional_fields) > 0:

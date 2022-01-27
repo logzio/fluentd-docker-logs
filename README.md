@@ -91,9 +91,7 @@ Spin up your Docker containers if you haven’t done so already. Give your logs 
 To see all avilable tags refer to this projects repo on [Docker hub](https://hub.docker.com/r/logzio/fluentd-docker-logs/tags?page=1&ordering=last_updated)
 
 - 1.1.0:
-
-  - Add support additional fields
-
+  - add support additional fields
 - 1.0.0:
   - collect and sends container logs
   - Proxy support
