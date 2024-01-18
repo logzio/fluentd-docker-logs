@@ -90,6 +90,8 @@ Spin up your Docker containers if you haven’t done so already. Give your logs 
 
 To see all avilable tags refer to this projects repo on [Docker hub](https://hub.docker.com/r/logzio/fluentd-docker-logs/tags?page=1&ordering=last_updated)
 
+- 1.2.0:
+  - Bump fluentd version to `1.16`.
 - 1.1.0:
   - add support additional fields
 - 1.0.0:
