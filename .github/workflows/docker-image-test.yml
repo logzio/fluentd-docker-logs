@@ -18,7 +18,7 @@ jobs:
     - name: show logs
       run: docker logs test-docker-fluentd
     - name: Wait for ingestion
-      uses: jakejarvis/wait-action@master
+      uses: jakejarvis/wait-action@919fc193e07906705e5b7a50f90ea9e74d20b2b0 # master
       with:
         time: '120s'
     - uses: actions/checkout@v2
